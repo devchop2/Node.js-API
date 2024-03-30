@@ -1,12 +1,20 @@
 import express from "express";
-//import { createTokenOfPhone } from "../class01-nodejs/tokenCreater.js";
-import * as tokenCreater from "../class01-nodejs/tokenCreater";
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
+import { options } from "./swagger/config.js";
+
+//import { createTokenOfPhone } from "../class01-nodejs/tokenCreator.js";
+import * as tokenCreator from "../class01-nodejs/tokenCreator.js";
 
 const app = express();
 app.use(express.json());
 
+//swagger-UI
+const swaggerSpec = swaggerJsdoc(options);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, options));
+
 app.get("/boards", function (req, res) {
-  //db에 접속후 data 조회 , 조회했다고 ㄱ가정하고
+  //db에 접속후 data 조회 , 조회했다고 가정하고
   //db에서 꺼내온 결과를 브라우저에 응답으로 주기
 
   const result = [
@@ -30,11 +38,10 @@ app.post("/boards", function (req, res) {
 
 app.post("/tokens/phone", function (req, res) {
   console.log(req.body.phone);
-  let token = createTokenOfPhone(req.body.phone);
+  let token = tokenCreator.createTokenOfPhone(req.body.phone);
   console.log(token);
   if (token == "") res.send("err");
   else res.send("complete");
 });
 
 app.listen(3000);
-console.log("listen!");
