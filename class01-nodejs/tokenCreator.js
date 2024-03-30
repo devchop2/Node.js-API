@@ -8,5 +8,3 @@ export const createTokenOfPhone = (phoneNum) => {
   console.log("complete create. token:" + token);
   return token;
 };
-
-createTokenOfPhone("010123456");

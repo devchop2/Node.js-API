@@ -2,6 +2,7 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import { options } from "./swagger/config.js";
+import cors from "cors"; //yarn add cors
 
 //import { createTokenOfPhone } from "../class01-nodejs/tokenCreator.js";
 import * as tokenCreator from "../class01-nodejs/tokenCreator.js";
@@ -9,8 +10,9 @@ import * as tokenCreator from "../class01-nodejs/tokenCreator.js";
 const app = express();
 app.use(express.json());
 
-//swagger-UI
-const swaggerSpec = swaggerJsdoc(options);
+app.use(cors()); // use cors
+
+const swaggerSpec = swaggerJsdoc(options); //swagger-UI
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, options));
 
 app.get("/boards", function (req, res) {
@@ -37,6 +39,7 @@ app.post("/boards", function (req, res) {
 });
 
 app.post("/tokens/phone", function (req, res) {
+  console.log("aa");
   console.log(req.body.phone);
   let token = tokenCreator.createTokenOfPhone(req.body.phone);
   console.log(token);
