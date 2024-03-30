@@ -1,0 +1,13 @@
+원래는 파일을 수정하면 프로그램 리부트가 필요했음.
+ nodemon을 통해 재실행 없이 변경사항이 반영되도록 하자.
+
+yarn add nodemon
+package.json 에 script 구문 추가
+
+
+ "scripts":{
+    "nodemon": "nodemon"
+  },
+
+
+실행을 yarn nodemon index.js 로 하면됨.
