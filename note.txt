@@ -1,0 +1,11 @@
+nestjs 설치하기
+
+1. yarn add @nestjs/cli
+
+2. @nestjs/cli new [filename]
+
+3. 설치했던 @nestjs/cli 를 삭제
+
+이거를 한번에하는방법
+>npx @nestjs/cli new [filename]
+
